@@ -1,23 +1,25 @@
 ### apache config test
-
 ```
 /usr/sbin/httpd -t
 /usr/sbin/apachectl configtest
 ```
-### apache dump modules
-
+### dump modules
 ```
 sudo httpd -M
 ```
-
+### show vhost and run settings
+```
+sudo httpd -S
+```
+### show compile settings
+```
+sudo httpd -V
+```
 ### apache benchmark
-
 ```
 ab -n 500 -c 100 https://example.com/
 ```
-
 ### apache log
-
 - Total size of response from clients excluding headers.
 ```
 cat access_log|awk '{S+=$10} END {printf("%d MB\n",S/1024/1024)}'
