@@ -1,3 +1,21 @@
+### apache config test
+
+```
+/usr/sbin/httpd -t
+/usr/sbin/apachectl configtest
+```
+### apache dump modules
+
+```
+sudo httpd -M
+```
+
+### apache benchmark
+
+```
+ab -n 500 -c 100 https://example.com/
+```
+
 ### apache log
 
 - Total size of response from clients excluding headers.
@@ -14,10 +32,4 @@ cat access_log|awk '{print $4}'|cut -b 2-15|sort|uniq -c
 ```
 
 (https://trinitas.jp/column/1758/)
-
-### apache benchmark
-
-```
-ab -n 500 -c 100 https://example.com/
-```
 
