@@ -2,17 +2,17 @@
 # alart mail for disk usage
 export LANG=C
 
-# Thresholds (%)
+# Thresholds LOW MIDDLE HIGH (%)
 TL=70
 TM=80
 TH=90
 
-# Log path and rotation
+# Log Drectory, Filename and Number of rotation
 LOGD="/opt/tools/log"
 LOGF="${LOGD}/dfml1.log"
 ROT=5
 
-# Mail destination
+# Mail destination address
 ADDR="your_account@your.domain.com"
 
 # Rotate logs
@@ -27,7 +27,7 @@ done
 # Header
 echo "$(uname -n) $(date '+%Y-%m-%d %H:%M:%S') Usage file systems (Sev1>${TH}%, Sev2>${TM}%, Sev3>${TL}%)" > "${LOGF}"
 
-# check Disk usage
+# Check Disk usage, except specified directories, output log
 maxlv=$(df -hP | awk -v logfile="${LOGF}" -v tl=$TL -v tm=$TM -v th=$TH '
 $6 !~ "^/$" &&
 $6 !~ "^/boot" &&
@@ -44,7 +44,7 @@ $6 !~ "^/opt/except/dir" {
 END { print (mx > 0 ? mx : 0) }
 ')
 
-# Subject line
+# mail Subject line
 SBJ="Warning! disk overused [Sev$((4 - maxlv))]"
 
 # Output log
@@ -53,7 +53,7 @@ cat "${LOGF}"
 # Send mail if needed
 if [ "$(wc -l < "${LOGF}")" -gt 1 ]; then
     echo "Sending email to ${ADDR}..."
-    echo sudo mail -r "wasroot" -s "${SBJ}" "${ADDR}" < "${LOGF}"
+    sudo mail -r "senderName" -s "${SBJ}" "${ADDR}" < "${LOGF}"
     echo "----" >> "${LOGF}"
     df -hP >> "${LOGF}"
 fi
