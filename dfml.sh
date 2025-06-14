@@ -53,7 +53,7 @@ cat "${LOGF}"
 # Send mail if needed
 if [ "$(wc -l < "${LOGF}")" -gt 1 ]; then
     echo "Sending email to ${ADDR}..."
-    sudo mail -r "senderName" -s "${SBJ}" "${ADDR}" < "${LOGF}"
+    sudo mail -r "foo" -s "${SBJ}" "${ADDR}" < "${LOGF}"
     echo "----" >> "${LOGF}"
     df -hP >> "${LOGF}"
 fi
