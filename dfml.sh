@@ -1,4 +1,4 @@
-#!/bin/bash -eux
+#!/bin/bash
 # alart mail for disk usage
 export LANG=C
 
