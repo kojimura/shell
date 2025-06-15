@@ -24,4 +24,4 @@ done
 shift `expr $OPTIND - 1`
 
 echo "Finding big(>${SIZE} old(>${DAYS}) files in $PTH >>>"
-sudo find ${dir} -type f mtime +${DAYS} -size +${SIZE} -exec ls -lh {} \;
+sudo find ${dir} -type f -mtime +${DAYS} -size +${SIZE} -exec ls -lh {} \;
